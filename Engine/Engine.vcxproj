@@ -146,7 +146,7 @@ xcopy $(OutDir)\*.lib $(SolutionDir)\Lib\ /e /y</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ENGINE_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\;$(ProjectDir)\PreCompiledHeader\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)PreCompiledHeader\</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreCompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
