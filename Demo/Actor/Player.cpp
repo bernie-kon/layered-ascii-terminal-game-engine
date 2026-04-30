@@ -12,56 +12,22 @@ void Player::Update(float deltaTime)
 	// 부모 함수 호출.
 	Super::Update(deltaTime);
 
-	// 키 입력 처리.
-	if (Engine::Get().GetKey(VK_LEFT))
-	{
-		// 새 위치 계산.
-		Vector2 newPosition = position;
-		--newPosition.x;
-		if (newPosition.x < 0)
-		{
-			newPosition.x = 0;
-		}
+	// 새 위치
+	Vector2 newPosition = position;
 
-		SetPosition(newPosition);
-	}
+	if (Engine::Get().GetKey(VK_LEFT))  --newPosition.x;
+	if (Engine::Get().GetKey(VK_RIGHT)) ++newPosition.x;
+	if (Engine::Get().GetKey(VK_UP))    --newPosition.y;
+	if (Engine::Get().GetKey(VK_DOWN))  ++newPosition.y;
 
-	if (Engine::Get().GetKey(VK_RIGHT))
-	{
-		// 새 위치 계산.
-		Vector2 newPosition = position;
-		++newPosition.x;
-		if (newPosition.x > 30)
-		{
-			newPosition.x = 30;
-		}
+	// 테두리 안으로 이동 범위 제한
+	int GameWidth	= Engine::Get().GetScreenWidth();
+	int GameHeight	= Engine::Get().GetScreenHeight();
 
-		SetPosition(newPosition);
-	}
-
-	if (Engine::Get().GetKey(VK_UP))
-	{
-		// 새 위치 계산.
-		Vector2 newPosition = position;
-		--newPosition.y;
-		if (newPosition.y < 0)
-		{
-			newPosition.y = 0;
-		}
-
-		SetPosition(newPosition);
-	}
-
-	if (Engine::Get().GetKey(VK_DOWN))
-	{
-		// 새 위치 계산.
-		Vector2 newPosition = position;
-		++newPosition.y;
-		if (newPosition.y > 24)
-		{
-			newPosition.y = 24;
-		}
-
-		SetPosition(newPosition);
-	}
+	if (newPosition.x < 1)                newPosition.x = 1;
+	if (newPosition.x > GameWidth - 2) newPosition.x = GameWidth - 2;
+	if (newPosition.y < 1)                newPosition.y = 1;
+	if (newPosition.y > GameHeight - 2) newPosition.y = GameHeight - 2;
+	
+	SetPosition(newPosition);
 }
