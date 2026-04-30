@@ -1,12 +1,15 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
+
+constexpr int SCREEN_WIDTH	= 80;
+constexpr int SCREEN_HEIGHT = 25;
 
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
 
-// ¸Þ¸ð¸® »èÁ¦ ÇÔ¼ö.
+// ë©”ëª¨ë¦¬ ì‚­ì œ í•¨ìˆ˜.
 template<typename T>
 void SafeDelete(T* pointer)
 {
@@ -17,7 +20,7 @@ void SafeDelete(T* pointer)
 	}
 }
 
-// ·Î±× ÇÔ¼ö.
+// ë¡œê·¸ í•¨ìˆ˜.
 template<typename... T>
 void Log(const char* format, T&&... args)
 {
@@ -26,7 +29,7 @@ void Log(const char* format, T&&... args)
 	std::cout << buffer;
 }
 
-// µð¹ö±ë ¿ëµµ.
+// ë””ë²„ê¹… ìš©ë„.
 #ifdef _DEBUG
 #define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
 // Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the

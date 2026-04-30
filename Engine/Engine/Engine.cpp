@@ -18,6 +18,9 @@ Engine::Engine()
 
 	// 기본 타겟 프레임 속도 설정.
 	SetTargetFrameRate(60.0f);
+
+	memset(frameBuffer, ' ', sizeof(frameBuffer));
+	memset(previousBuffer, ' ', sizeof(previousBuffer));
 }
 
 Engine::~Engine()
@@ -255,14 +258,43 @@ void Engine::Clear()
 
 void Engine::Draw()
 {
-	// 화면 지우기.
-	Clear();
-
+	BeginFrame();
 	// 레벨 그리기.
 	if (mainLevel != nullptr)
 	{
 		mainLevel->Draw();
 	}
+	EndFrame();
+}
+
+void Engine::BeginFrame()
+{
+	memset(frameBuffer, ' ', sizeof(frameBuffer));
+}
+
+void Engine::EndFrame()
+{
+	for (int y = 0; y < SCREEN_HEIGHT; ++y)
+	{
+		for (int x = 0; x < SCREEN_WIDTH; ++x)
+		{
+			if (frameBuffer[y][x] != previousBuffer[y][x])
+			{
+				SetCursorPosition(x, y);
+				std::cout << frameBuffer[y][x];
+			}
+		}
+	}
+
+	memcpy(previousBuffer, frameBuffer, sizeof(frameBuffer));
+}
+
+void Engine::WriteCell(int x, int y, char ch)
+{
+	if (x < 0 || x >= SCREEN_WIDTH)  return;
+	if (y < 0 || y >= SCREEN_HEIGHT) return;
+
+	frameBuffer[y][x] = ch;
 }
 
 void Engine::SavePreviouseKeyStates()

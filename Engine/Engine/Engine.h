@@ -59,6 +59,12 @@ public:
 	// 싱글톤 객체 접근 함수.
 	static Engine& Get();
 
+	// 프레임버퍼에 문자 기록.
+	void WriteCell(int x, int y, char ch);
+
+	int GetScreenWidth()  const { return SCREEN_WIDTH; }
+	int GetScreenHeight() const { return SCREEN_HEIGHT; }
+
 protected:
 	void ProcessInput();				// 입력 처리.
 	void Update(float deltaTime);		// Tick();
@@ -68,6 +74,9 @@ protected:
 
 	// 이전 프레임의 키 상태를 저장하는 함수.
 	void SavePreviouseKeyStates();
+
+	void BeginFrame();					// 프레임버퍼 초기화.
+	void EndFrame();					// diff 후 콘솔 출력.
 
 protected:
 
@@ -91,4 +100,7 @@ protected:
 
 	// 프레임을 업데이트해야 하는지 여부를 나타내는 변수.
 	bool shouldUpdate = true;
+
+	char frameBuffer[SCREEN_HEIGHT][SCREEN_WIDTH];
+	char previousBuffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 };

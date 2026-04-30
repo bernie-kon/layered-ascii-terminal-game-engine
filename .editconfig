@@ -1,0 +1,10 @@
+root = true
+
+[*.{cpp,h}]
+charset = utf-8-bom
+
+[*.json]
+charset = utf-8
+
+[*.{map,txt}]
+charset = utf-8
